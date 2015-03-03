@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>前端文档</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/markdown.css" type="text/css">
+    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="js/comme.js"></script>
+    <script type="text/javascript" src="js/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="js/ztree_toc.js"></script>
+    <script type="text/javascript" src="js/ddddd.js"></script>
+
+</head>
+<body>
+<h1>HTML/CSS</h1>
+
+<h2>css3元素过滤器</h2>
+
+<p>CSS3选择器中，有一个叫做属性选择器的东西，有：</p>
+
+<ul class="task-list">
+<li>
+<code>[attr]</code> 有该属性</li>
+<li>
+<code>[attr=xxx]</code>属性值是xxx</li>
+<li>
+<code>[attr^=xxx]</code>属性值是xxx开头</li>
+<li>
+<code>[attr$=xxx]</code>属性值xxx擦结尾</li>
+<li>
+<code>[attr*=xxx]</code>属性值中包含xxx</li>
+</ul>
+
+<p>demo中的过滤使用的是任意匹配，也就是[attr*=xxx]这种用法。于是，我们再结合not选择器就可以把不匹配的元素给隐藏了，例如：</p>
+
+<div class="highlight highlight-css"><pre><span class="pl-e">.list</span><span class="pl-e">:not</span>([data-index<span class="pl-ent">*</span>="sh"]) { <span class="pl-mp"><span class="pl-s3">display</span></span>: <span class="pl-sc">none</span>; }</pre></div>
+
+<p>就是所有data-index值中不含有sh的列表隐藏。</p>
+
+<h3>兼容性</h3>
+
+<p>属性选择器IE8就开始支持了，不过如果要使用到not选择器，似乎又要IE9+浏览器了。<br>
+因此，本技术目前IE9+支持，IE6-IE8需要JS代码实现。</p>
+
+<h3>DEMO</h3>
+
+<div class="highlight highlight-HTML"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span> <span class="pl-e">lang</span>=<span class="pl-s1"><span class="pl-pds">"</span>en<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">head</span>&gt;
+    &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s1"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">title</span>&gt;Document&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s2">    &lt;<span class="pl-ent">style</span>&gt;</span>
+<span class="pl-s2">        <span class="pl-e">.search</span> {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">width</span></span>: <span class="pl-c1">180<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">padding</span></span>: <span class="pl-c1">5<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp">-webkit-<span class="pl-s3">box-sizing</span></span>: content-box;</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-e">.datalist</span> {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">display</span></span>: <span class="pl-sc">block</span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">visibility</span></span>: <span class="pl-sc">hidden</span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">width</span></span>: <span class="pl-c1">190<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-c1">#fff</span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">box-shadow</span></span>: <span class="pl-c1">0</span> <span class="pl-c1">1<span class="pl-k">px</span></span> <span class="pl-c1">#ccc</span>, <span class="pl-c1">1<span class="pl-k">px</span></span> <span class="pl-c1">0</span> <span class="pl-c1">#ccc</span>, <span class="pl-c1">-1<span class="pl-k">px</span></span> <span class="pl-c1">0</span> <span class="pl-c1">#ccc</span>, <span class="pl-c1">0</span> <span class="pl-c1">-1<span class="pl-k">px</span></span> <span class="pl-c1">#ccc</span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">overflow</span></span>: <span class="pl-sc">hidden</span>;</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-e">.search</span><span class="pl-e">:focus</span> + <span class="pl-e">.datalist</span> {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">visibility</span></span>: <span class="pl-sc">visible</span>;</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-e">.list</span> {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">margin-top</span></span>: <span class="pl-c1">-1<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">padding</span></span>: <span class="pl-c1">4<span class="pl-k">px</span></span> <span class="pl-c1">10<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">border-top</span></span>: <span class="pl-c1">1<span class="pl-k">px</span></span> <span class="pl-sc">solid</span> <span class="pl-c1">#eee</span>;</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-e">.list</span><span class="pl-e">:hover</span> {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-c1">#f0f0f0</span>;</span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2">    &lt;/<span class="pl-ent">style</span>&gt;</span>
+&lt;/<span class="pl-ent">head</span>&gt;
+&lt;<span class="pl-ent">body</span>&gt;
+&lt;<span class="pl-ent">div</span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>effect<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>part<span class="pl-pds">"</span></span> <span class="pl-e">style</span>=<span class="pl-s1"><span class="pl-pds">"</span>height:800px;<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">h3</span>&gt;效果：&lt;/<span class="pl-ent">h3</span>&gt;
+
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>show<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>demo<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>search<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>search<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span> <span class="pl-e">placeholder</span>=<span class="pl-s1"><span class="pl-pds">"</span>输入省会或直辖市名称<span class="pl-pds">"</span></span>/&gt;
+            &lt;<span class="pl-ent">label</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>datalist<span class="pl-pds">"</span></span> <span class="pl-e">for</span>=<span class="pl-s1"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>重庆市chongqing<span class="pl-pds">"</span></span>&gt;重庆市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>哈尔滨市haerbing<span class="pl-pds">"</span></span>&gt;哈尔滨市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>长春市changchun<span class="pl-pds">"</span></span>&gt;长春市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>兰州市lanzhou<span class="pl-pds">"</span></span>&gt;兰州市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>北京市beijing<span class="pl-pds">"</span></span>&gt;北京市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>杭州市hangzhou<span class="pl-pds">"</span></span>&gt;杭州市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>长沙市changsha<span class="pl-pds">"</span></span>&gt;长沙市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>沈阳市shenyang<span class="pl-pds">"</span></span>&gt;沈阳市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>成都市chengdu<span class="pl-pds">"</span></span>&gt;成都市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>合肥市hefei<span class="pl-pds">"</span></span>&gt;合肥市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>天津市tianjin<span class="pl-pds">"</span></span>&gt;天津市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>西安市xian<span class="pl-pds">"</span></span>&gt;西安市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>武汉市wuhan<span class="pl-pds">"</span></span>&gt;武汉市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>济南市jinan<span class="pl-pds">"</span></span>&gt;济南市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>广州市guangzhou<span class="pl-pds">"</span></span>&gt;广州市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>南京市nanjing<span class="pl-pds">"</span></span>&gt;南京市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>上海市shanghai<span class="pl-pds">"</span></span>&gt;上海市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>昆明市kunming<span class="pl-pds">"</span></span>&gt;昆明市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>郑州市zhangzhou<span class="pl-pds">"</span></span>&gt;郑州市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>贵阳市guiyang<span class="pl-pds">"</span></span>&gt;贵阳市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>西宁市xining<span class="pl-pds">"</span></span>&gt;西宁市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>海口市haikou<span class="pl-pds">"</span></span>&gt;海口市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>南昌市nanchang<span class="pl-pds">"</span></span>&gt;南昌市&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>香港 特区xianggang<span class="pl-pds">"</span></span>&gt;香港 特区&lt;/<span class="pl-ent">div</span>&gt;
+                &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>list<span class="pl-pds">"</span></span> <span class="pl-e">data-index</span>=<span class="pl-s1"><span class="pl-pds">"</span>澳门 特区aomen<span class="pl-pds">"</span></span>&gt;澳门 特区&lt;/<span class="pl-ent">div</span>&gt;
+            &lt;/<span class="pl-ent">label</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;
+<span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s2">    <span class="pl-k">if</span> (<span class="pl-s3">document</span>.addEventListener) {</span>
+<span class="pl-s2">        <span class="pl-s">var</span> eleStyle <span class="pl-k">=</span> <span class="pl-s3">document</span>.<span class="pl-s3">createElement</span>(<span class="pl-s1"><span class="pl-pds">"</span>style<span class="pl-pds">"</span></span>),</span>
+<span class="pl-s2">                eleInput <span class="pl-k">=</span> <span class="pl-s3">document</span>.querySelector(<span class="pl-s1"><span class="pl-pds">"</span>#city<span class="pl-pds">"</span></span>),</span>
+<span class="pl-s2">                eleDatalist <span class="pl-k">=</span> <span class="pl-s3">document</span>.querySelector(<span class="pl-s1"><span class="pl-pds">"</span>.datalist<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">// 用来CSS控制的style插入</span></span>
+<span class="pl-s2">        <span class="pl-s3">document</span>.querySelector(<span class="pl-s1"><span class="pl-pds">"</span>head<span class="pl-pds">"</span></span>).<span class="pl-s3">appendChild</span>(eleStyle);</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">// 文本框输入</span></span>
+<span class="pl-s2">        eleInput.addEventListener(<span class="pl-s1"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span>, <span class="pl-st">function</span> () {</span>
+<span class="pl-s2">            <span class="pl-s">var</span> val <span class="pl-k">=</span> <span class="pl-v">this</span>.<span class="pl-sc">value</span>.trim().<span class="pl-s3">toLowerCase</span>();</span>
+<span class="pl-s2">            <span class="pl-k">if</span> (val <span class="pl-k">!==</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>) {</span>
+<span class="pl-s2">                eleStyle.innerHTML <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>.list:not([data-index*="<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-v">this</span>.<span class="pl-sc">value</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">'</span>"]) { display: none; }<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s2">            } <span class="pl-k">else</span> {</span>
+<span class="pl-s2">                eleStyle.innerHTML <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;</span>
+<span class="pl-s2">            }</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2"></span>
+<span class="pl-s2">        <span class="pl-c">// 点击确定</span></span>
+<span class="pl-s2">        eleDatalist.addEventListener(<span class="pl-s1"><span class="pl-pds">"</span>mousedown<span class="pl-pds">"</span></span>, <span class="pl-st">function</span> (<span class="pl-vpf">event</span>) {</span>
+<span class="pl-s2">            eleInput.<span class="pl-sc">value</span> <span class="pl-k">=</span> <span class="pl-s3">event</span>.<span class="pl-sc">target</span>.innerHTML;</span>
+<span class="pl-s2">            eleInput.<span class="pl-s3">blur</span>();</span>
+<span class="pl-s2">        });</span>
+<span class="pl-s2">    } <span class="pl-k">else</span> {</span>
+<span class="pl-s2">        <span class="pl-s">var</span> timeClick <span class="pl-k">=</span> <span class="pl-c1">0</span>;</span>
+<span class="pl-s2">        <span class="pl-s3">document</span>.querySelector <span class="pl-k">&amp;&amp;</span> (<span class="pl-s3">document</span>.querySelector(<span class="pl-s1"><span class="pl-pds">"</span>.datalist<span class="pl-pds">"</span></span>).<span class="pl-sc">style</span>.<span class="pl-sc">visibility</span> <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s2">        <span class="pl-s3">document</span>.<span class="pl-s3">getElementById</span>(<span class="pl-s1"><span class="pl-pds">"</span>city<span class="pl-pds">"</span></span>).<span class="pl-en">onclick</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {</span>
+<span class="pl-s2">            timeClick<span class="pl-k">++</span>;</span>
+<span class="pl-s2">            <span class="pl-k">if</span> (timeClick <span class="pl-k">==</span> <span class="pl-c1">3</span>) {</span>
+<span class="pl-s2">                <span class="pl-v">this</span>.insertAdjacentHTML(<span class="pl-s1"><span class="pl-pds">"</span>beforebegin<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>&lt;p style="color:#cd0000;"&gt;别点了，浏览器不给力，点到菊花盛开也没有的！&lt;/p&gt;<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s2">            }</span>
+<span class="pl-s2">        };</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">&lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<pre><code>2015/3/3 15:16:37 
+</code></pre>
+
+<h2>margin:auto实现绝对定位元素的水平垂直居中</h2>
+
+<h3>CSS3实现方法就是使用<code>transform</code>
+</h3>
+
+<div class="highlight highlight-css"><pre><span class="pl-e">.element</span> {
+    <span class="pl-mp"><span class="pl-s3">position</span></span>: <span class="pl-sc">absolute</span>;
+    <span class="pl-mp"><span class="pl-s3">left</span></span>: <span class="pl-c1">50<span class="pl-k">%</span></span>; 
+    <span class="pl-mp"><span class="pl-s3">top</span></span>: <span class="pl-c1">50<span class="pl-k">%</span></span>;
+    <span class="pl-mp"><span class="pl-s3">transform</span></span>: translate(<span class="pl-c1">-50<span class="pl-k">%</span></span>, <span class="pl-c1">-50<span class="pl-k">%</span></span>);    <span class="pl-c">/* 50%为自身尺寸的一半 */</span>
+}</pre></div>
+
+<h3>使用margin:auto方法</h3>
+
+<div class="highlight highlight-css"><pre><span class="pl-e">.element</span> {
+    <span class="pl-mp"><span class="pl-s3">position</span></span>: <span class="pl-sc">absolute</span>; 
+    <span class="pl-mp"><span class="pl-s3">left</span></span>: <span class="pl-c1">0</span>; 
+    <span class="pl-mp"><span class="pl-s3">top</span></span>: <span class="pl-c1">0</span>;
+    <span class="pl-mp"><span class="pl-s3">right</span></span>: <span class="pl-c1">0</span>;
+    <span class="pl-mp"><span class="pl-s3">bottom</span></span>: <span class="pl-c1">0</span>;
+    <span class="pl-mp"><span class="pl-s3">margin</span></span>: <span class="pl-sc">auto</span>;    <span class="pl-c">/* 有了这个就自动居中了 */</span>
+}</pre></div>
+
+<p>该方法IE8+以及其他浏览器都是OK的.</p>
+
+<h3>DEMO</h3>
+
+<div class="highlight highlight-html"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span> <span class="pl-e">lang</span>=<span class="pl-s1"><span class="pl-pds">"</span>en<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">head</span>&gt;
+    &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s1"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">title</span>&gt;Document&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s2">    &lt;<span class="pl-ent">style</span>&gt;</span>
+<span class="pl-s2">    <span class="pl-e">.demo</span>{</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">width</span></span>:<span class="pl-c1">200<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">height</span></span>:<span class="pl-c1">40<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">background</span></span>:<span class="pl-sc">red</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">position</span></span>: <span class="pl-sc">absolute</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">left</span></span>: <span class="pl-c1">0</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">top</span></span>: <span class="pl-c1">0</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">right</span></span>: <span class="pl-c1">0</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">bottom</span></span>: <span class="pl-c1">0</span>;</span>
+<span class="pl-s2">        <span class="pl-mp"><span class="pl-s3">margin</span></span>: <span class="pl-sc">auto</span>;</span>
+<span class="pl-s2">    }</span>
+<span class="pl-s2">    &lt;/<span class="pl-ent">style</span>&gt;</span>
+&lt;/<span class="pl-ent">head</span>&gt;
+&lt;<span class="pl-ent">body</span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>demo<span class="pl-pds">"</span></span>&gt;test&lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<pre><code>2015/3/1 10:17:08 
+</code></pre>
+
+<h1>JavaScript/Jquery</h1>
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

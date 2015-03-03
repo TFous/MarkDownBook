@@ -13,7 +13,8 @@ $(function(){
         $(".showbtn").show();
     });
     $('#tree').ztree_toc({
-        is_auto_number: true
+        is_auto_number:true,
+        is_expand_all: false
         // documment_selector: '.first_part'
     });
 });
