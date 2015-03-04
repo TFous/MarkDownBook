@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>前端文档</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>前端文档</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" href="css/markdown.css" type="text/css">
     <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
@@ -12,6 +12,8 @@
 </head>
 <body>
 <h1>HTML/CSS</h1>
+
+<hr>
 
 <h2>css3元素过滤器</h2>
 
@@ -159,6 +161,8 @@
 <pre><code>2015/3/3 15:16:37 
 </code></pre>
 
+<hr>
+
 <h2>margin:auto实现绝对定位元素的水平垂直居中</h2>
 
 <h3>CSS3实现方法就是使用<code>transform</code>
@@ -212,6 +216,110 @@
 
 <pre><code>2015/3/1 10:17:08 
 </code></pre>
+
+<hr>
+
+<h2>div显示滚动条的CSS代码</h2>
+
+<p>主要用<code>overflow</code>标签，属性规定当内容溢出元素框时发生的事情。<br>
+值为visible(默认值)、scroll、hidden、auto。</p>
+
+<div class="highlight highlight-css"><pre><span class="pl-e">.demo</span>{
+    <span class="pl-mp"><span class="pl-s3">overflow-y</span></span>:<span class="pl-sc">auto</span>; //垂直方向内容溢出时的设置
+    <span class="pl-mp"><span class="pl-s3">overflow-x</span></span>:<span class="pl-sc">auto</span>; //水平方向内容溢出时的设置
+}</pre></div>
+
+<h3>滚动条颜色</h3>
+
+<h4>IE浏览器中自定义滚动条样式：</h4>
+
+<div class="highlight highlight-css"><pre>HTML {   
+    <span class="pl-mp">scrollbar-base-<span class="pl-s3">color</span></span>: <span class="pl-c1">#C0C0C0</span>; //滚动条的基本颜色
+    <span class="pl-mp">scrollbar-</span>3<span class="pl-mp">dlight-<span class="pl-s3">color</span></span>: <span class="pl-c1">#C0C0C0</span>; //设置滚动条的颜色
+    <span class="pl-mp">scrollbar-highlight-<span class="pl-s3">color</span></span>: <span class="pl-c1">#C0C0C0</span>; //滚动条空白部分的颜色   
+    <span class="pl-mp">scrollbar-track-<span class="pl-s3">color</span></span>: <span class="pl-c1">#EBEBEB</span>; //设置或检索滚动条的拖动区域(T<span class="pl-mp">rack</span>B<span class="pl-mp">ar</span>)颜色   
+    <span class="pl-mp">scrollbar-arrow-<span class="pl-s3">color</span></span>: <span class="pl-sc">black</span>; //上下按钮上三角箭头的颜色 
+    <span class="pl-mp">scrollbar-<span class="pl-s3">shadow</span>-<span class="pl-s3">color</span></span>: <span class="pl-c1">#C0C0C0</span>; //立体滚动条强阴影的颜色  
+    <span class="pl-mp">scrollbar-dark-<span class="pl-s3">shadow</span>-<span class="pl-s3">color</span></span>: <span class="pl-c1">#C0C0C0</span>; //立体滚动条阴影的颜色   
+}  </pre></div>
+
+<h4>CHROME浏览器中自定义滚动条样式：</h4>
+
+<div class="highlight highlight-css"><pre>::-webkit-scrollbar { <span class="pl-mp"><span class="pl-s3">width</span></span>: <span class="pl-c1">3<span class="pl-k">px</span></span>; <span class="pl-mp"><span class="pl-s3">height</span></span>: <span class="pl-c1">3<span class="pl-k">px</span></span>;}   
+::-webkit-scrollbar-track-piece { <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-c1">#ffffff</span>;}   
+::-webkit-scrollbar-thumb{<span class="pl-mp"><span class="pl-s3">height</span></span>: <span class="pl-c1">50<span class="pl-k">px</span></span>; <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-c1">#666</span>; <span class="pl-mp">-webkit-<span class="pl-s3">border-radius</span></span>: <span class="pl-c1">3<span class="pl-k">px</span></span>;}</pre></div>
+
+<p>解释：<br>
+::-webkit-scrollbar 滚动条宽跟高<br>
+::-webkit-scrollbar-track-piece 滚动条样式底部内层样式<br>
+::-webkit-scrollbar-thumb 滚动条滑块样式<br>
+-webkit-border-radius: 滚动条滑块边角–导圆角</p>
+
+<h4>FireFox下自定义滚动条：(或许有些问题，参考<a href="http://g.mozest.com/thread-38113-1-1">http://g.mozest.com/thread-38113-1-1</a>)</h4>
+
+<p>@-moz-document url-prefix(http://),url-prefix(https://) {<br><br>
+滚动条颜色</p>
+
+<div class="highlight highlight-css"><pre>scrollbar {   
+   <span class="pl-mp">-moz-<span class="pl-s3">appearance</span></span>: <span class="pl-sc">none</span> <span class="pl-k">!important</span>;   
+   <span class="pl-mp"><span class="pl-s3">background</span></span>: <span class="pl-s3">rgb</span>(<span class="pl-c1">0,255,0</span>) <span class="pl-k">!important</span>;   
+}</pre></div>
+
+<p>滚动条按钮颜色</p>
+
+<div class="highlight highlight-css"><pre>thumb,scrollbarbutton {   
+   <span class="pl-mp">-moz-<span class="pl-s3">appearance</span></span>: <span class="pl-sc">none</span> <span class="pl-k">!important</span>;   
+   <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-s3">rgb</span>(<span class="pl-c1">0,0,255</span>) <span class="pl-k">!important</span>;   
+}</pre></div>
+
+<p>鼠标悬停时按钮颜色  </p>
+
+<div class="highlight highlight-css"><pre>thumb<span class="pl-e">:hover</span>,scrollbarbutton<span class="pl-e">:hover</span> {   
+   <span class="pl-mp">-moz-<span class="pl-s3">appearance</span></span>: <span class="pl-sc">none</span> <span class="pl-k">!important</span>;   
+   <span class="pl-mp"><span class="pl-s3">background-color</span></span>: <span class="pl-s3">rgb</span>(<span class="pl-c1">255,0,0</span>) <span class="pl-k">!important</span>;   
+}</pre></div>
+
+<p>隐藏上下箭头</p>
+
+<div class="highlight highlight-css"><pre>scrollbarbutton {   
+   <span class="pl-mp"><span class="pl-s3">display</span></span>: <span class="pl-sc">none</span> <span class="pl-k">!important</span>;   
+}</pre></div>
+
+<p>纵向滚动条宽度</p>
+
+<div class="highlight highlight-css"><pre>scrollbar[orient="vertical"] {   
+  <span class="pl-mp"><span class="pl-s3">min-width</span></span>: <span class="pl-c1">15<span class="pl-k">px</span></span> <span class="pl-k">!important</span>;   
+}</pre></div>
+
+<h3>DEMO</h3>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">html</span>&gt;
+&lt;<span class="pl-ent">head</span>&gt;
+<span class="pl-s2">    &lt;<span class="pl-ent">style</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s2">        <span class="pl-ent">div</span></span>
+<span class="pl-s2">        {</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">background-color</span></span>:<span class="pl-c1">#00FFFF</span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">width</span></span>:<span class="pl-c1">150<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">height</span></span>:<span class="pl-c1">150<span class="pl-k">px</span></span>;</span>
+<span class="pl-s2">            <span class="pl-mp"><span class="pl-s3">overflow</span></span>: <span class="pl-sc">auto</span></span>
+<span class="pl-s2">        }</span>
+<span class="pl-s2">    &lt;/<span class="pl-ent">style</span>&gt;</span>
+&lt;/<span class="pl-ent">head</span>&gt;
+
+&lt;<span class="pl-ent">body</span>&gt;
+&lt;<span class="pl-ent">p</span>&gt;如果元素中的内容超出了给定的宽度和高度属性，overflow 属性可以确定是否显示滚动条等行为。&lt;/<span class="pl-ent">p</span>&gt;
+
+&lt;<span class="pl-ent">div</span>&gt;
+    这个属性定义溢出元素内容区的内容会如何处理。如果值为 scroll，不论是否需要，用户代理都会提供一种滚动机制。因此，有可能即使元素框中可以放下所有内容也会出现滚动条。默认值是 visible。
+&lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">body</span>&gt;
+
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<pre><code>2015/3/4 10:16:49
+</code></pre>
+
+<hr>
 
 <h1>JavaScript/Jquery</h1>
 </body>
